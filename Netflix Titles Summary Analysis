@@ -1,0 +1,63 @@
+---
+title: "Netflix Titles Analysis"
+  pdf_document: default
+  html_document: default
+date: '2022-03-19'
+---
+
+
+# Read dataset
+```{r}
+netflix_titles <- read.csv("netflix_titles.csv")
+```
+
+
+```{r, echo = F}
+library(tidyverse)
+library(ggplot2)
+```
+
+
+**Exploratory Data Analysis**
+
+
+1. *Which Types (TV shows or movies) had the most releases per year?*
+
+From the scatter plot, it is observed that TV shows and movies clustered after 2000 and since Netflix began streaming in 2007, the amount of shows and movies increased significantly. Movies saw an increase from 2000 and began a significant clustering from 2004 till 2021. Before 2000, movie release years were few and far between and could be attributed to DVD releases since Netflix began in 1997. Release years of TV shows are significantly less than movies with a majority cluster forming in the mid-2010s. An outlier TV show with a release year of 1925 is Pioneers: First Women Filmmakers. Overall, movies had significantly more releases than TV shows even as the latter's releases peaked in 2020 compared to movies releases peak in 2018.
+
+
+```{r, echo = FALSE}
+ggplot(data = netflix_titles, aes(x = release_year , y = type)) + geom_point() + geom_jitter()
+```
+
+
+2. *Which release year had the most number of show releases?*
+From the histogram, it is observed that the years between 2015 and 2020 saw approximately 5000 TV shows and movies released, with frequency increasing from 2000. 2020 saw a sharp decline in releases due to the global pandemic.
+
+```{r, echo = FALSE}
+hist(netflix_titles$release_year)
+```
+
+
+3. *What are the highest Ratings?* 
+
+Netflix has several ratings types for its TV shows and movies - PG, PG13, R, TV-MA. A column chart was used to visualize the most Ratings in the dataset and TV-MA is the highest rating followed closely by TV-14 and PG ratings.
+
+```{r, echo = FALSE}
+ggplot(data = netflix_titles, aes(x = rating , y = type)) + geom_col() + geom_jitter()
+```
+
+4. *Release year & total show types*
+
+The mid 2010s (~ 2018) saw a peak of over 3000 show types released (TV shows and movies) following a slow rise in the late 1990s that jumped significantly around 1997 and accelerated in 2010 to its 2018 peak. The steep decline thereafter was hastened with the onset of the pandemic is 2020.
+```{r, echo = FALSE}
+ggplot(data = netflix_titles, aes(x = release_year)) + geom_freqpoly() 
+```
+
+5. *Breakdown of show types per ratings and year*
+
+More movies were released across rating types compared to TV shows, with TV-PG, TV-MA and TV-14 ratings having the highest movie numbers released. TV show ratings with the highest number of releases are TV-14 followed closely by TV-MA.
+```{r, echo = FALSE}
+ggplot(data = netflix_titles, aes(x = release_year, y = rating)) + geom_point() + facet_wrap(~type)
+```
+
