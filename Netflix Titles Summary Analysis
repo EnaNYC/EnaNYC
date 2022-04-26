@@ -61,3 +61,47 @@ More movies were released across rating types compared to TV shows, with TV-PG, 
 ggplot(data = netflix_titles, aes(x = release_year, y = rating)) + geom_point() + facet_wrap(~type)
 ```
 
+6. *Were more Movies or TV shows released in the U.S. over time?*
+
+---Filter for USA and save to dataframe
+library(dplyr)
+```{r, echo = FALSE}
+netflix_usa <- netflix_titles %>% 
+               filter(country == "United States")
+```
+
+---Visualize netflix_usa dataframe
+```{r, echo = FALSE}               
+ggplot(netflix_usa, aes(release_year)) + geom_histogram(binwidth = 5) + ggtitle("USA Releases over Time")
+```
+
+--- Visualize faceting of movie and tv shows
+```{r, echo = FALSE}
+ggplot(netflix_usa, aes(type, release_year)) + geom_col() + 
+                    facet_wrap(~type) + 
+                    ggtitle("USA Show Types over Time")
+```
+
+7. *Explore Nigeria subset*
+---Filter dataset for Nigeria and save to dataframe
+
+netflix_nigeria <- netflix_titles %>%
+                  filter(country == "Nigeria")
+                  
+TV-MA and TV-14 ratings were significantly highest for all the show types in the Nigeria subset.                  
+
+---Visualize dataframe                
+```{r, echo = FALSE}            
+ggplot(netflix_nigeria, aes(x = release_year, y = rating)) + geom_col() + 
+                        ggtitle("Netflix Nigeria Show Ratings")
+```
+
+netflix_nigeria_subset <- netflix_titles %>%
+                          filter(country == "Nigeria", release_year == 2021) %>% 
+                          group_by(listed_in)
+
+---Visualization in column
+```{r, echo = FALSE}
+ggplot(netflix_nigeria_subset, aes(x = rating, y = listed_in, color = rating)) + geom_col()
+```
+
