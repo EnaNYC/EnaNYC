@@ -1,5 +1,5 @@
 - 👋 Hi, I’m @EnaNYC
-- 👀 I’m interested in building up a data (analyst) portfolio and learning code from experts
+- 👀 I’m interested in data analytics and data wrangling in the environmental space and I'm building a protfolio with said projects
 - 🌱 I’m currently learning R and SQL. All tips greatly welcome!
 - 💞️ I’m looking to collaborate on simple R projects, for starters
 - 📫 How to reach me https://www.linkedin.com/in/ena-ibeh/
